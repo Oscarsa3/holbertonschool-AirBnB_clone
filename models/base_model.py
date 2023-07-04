@@ -7,8 +7,8 @@ import datetime
 class BaseModel:
     """This class has attributes and methods"""
     id = str(uuid.uuid4())
-    created_at = datetime.datetime(2023, 7, 3, 13, 25, 13, 45, None)
-    updated_at = datetime.datetime(2023, 7, 3, 13, 25, 13, 45, None)
+    created_at = datetime.datetime.now()
+    updated_at = datetime.datetime.now()
 
     def __str__(self):
         """Print"""
@@ -20,7 +20,7 @@ class BaseModel:
     def save(self):
         """updates the public instance attribute updated_at
         with the current datetime"""
-        self.updated_at = datetime.datetime(2023, 7, 3, 13, 25, 13, 45, None)
+        self.updated_at = datetime.datetime.now()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of
