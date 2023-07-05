@@ -6,11 +6,9 @@ from models.base_model import BaseModel
 
 
 class FileStorage:
-    """h"""
-    def __init__(self):
-        """Inicializador"""
-        self.__file_path = f"{self.__class__.__name__}.json"
-        self.__objects = {}
+    """This class has attributes"""
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         """returns the dictionary __objects"""
@@ -23,7 +21,7 @@ class FileStorage:
     def save(self):
         """serializes __objects to the JSON file (path: __file_path)"""
         d1 = {}
-        with open(self.__file_path, 'w') as f:
+        with open(self.__file_path, "w") as f:
             for k, v in self.__objects.items():
                 d1[k] = v.__str__()
             f.write(json.dumps(d1))
