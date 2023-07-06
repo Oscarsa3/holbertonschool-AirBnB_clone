@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Our Console that contains the entry point of the command interpreter"""
 import cmd
+import json
 from models import storage
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
@@ -16,7 +17,7 @@ class HBNBCommand(cmd.Cmd):
         and prints the id"""
         if not arg:
             print("** class name missing **")
-        if arg == "BaseModel":
+        elif arg == "BaseModel":
             new = BaseModel()
             new.save()
             print(new.id)
@@ -35,7 +36,6 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) == 1:
                 print("** instance id missing **")
             elif args[1]:
-                list_id = []
                 all_objs = storage.all()
                 for key in all_objs.keys():
                     objs = all_objs[key]
@@ -55,16 +55,16 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
-            elif args[1]:
-                list_id = []
+            else:
                 all_objs = storage.all()
                 for key in all_objs.keys():
                     objs = all_objs[key]
                     if objs.id == args[1]:
                         del all_objs[key]
+                        storage.save()
                         break
                 else:
-                    print("** no instance found **")
+                    print("** instance id missing **")
 
     def do_all(self, arg):
         """Prints all string representation of all instances based
@@ -95,7 +95,6 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) == 3:
                 print("** value missing **")
             else:
-                list_id = []
                 all_objs = storage.all()
                 for key in all_objs.keys():
                     objs = all_objs[key]
@@ -115,11 +114,6 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, arg):
         """Quit command to exit the program"""
         return True
-
-    def close(self):
-        if self.file:
-            self.file.close()
-            self.file = None
 
 
 def separarArgs(arg):
