@@ -44,9 +44,9 @@ class HBNBCommand(cmd.Cmd):
             elif args[1]:
                 all_objs = storage.all()
                 for key in all_objs.keys():
-                    objs = all_objs[key]
-                    if objs.id == args[1]:
-                        print(objs)
+                    o = all_objs[key]
+                    if o.id == args[1] and o.__class__.__name__ == args[0]:
+                        print(o)
                         break
                 else:
                     print("** no instance found **")
@@ -64,8 +64,8 @@ class HBNBCommand(cmd.Cmd):
             else:
                 all_objs = storage.all()
                 for key in all_objs.keys():
-                    objs = all_objs[key]
-                    if objs.id == args[1]:
+                    o = all_objs[key]
+                    if o.id == args[1] and o.__class__.__name__ == args[0]:
                         del all_objs[key]
                         storage.save()
                         break
@@ -103,9 +103,9 @@ class HBNBCommand(cmd.Cmd):
             else:
                 all_objs = storage.all()
                 for key in all_objs.keys():
-                    objs = all_objs[key]
-                    if objs.id == args[1]:
-                        setattr(objs, args[2], args[3][1:-1])
+                    o = all_objs[key]
+                    if o.id == args[1] and o.__class__.__name__ == args[0]:
+                        setattr(o, args[2], args[3][1:-1])
                         break
                     else:
                         print("** no instance found **")
