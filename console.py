@@ -4,7 +4,7 @@ import cmd
 import json
 from models import storage
 from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -15,10 +15,14 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it (to the JSON file)
         and prints the id"""
+        cls = ["BaseModel", "User"]
         if not arg:
             print("** class name missing **")
-        elif arg == "BaseModel":
-            new = BaseModel()
+        elif arg in cls:
+            if arg == cls[0]:
+                new = BaseModel()
+            else:
+                new = User()
             new.save()
             print(new.id)
         else:
@@ -31,7 +35,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = separarArgs(arg)
-            if args[0] != "BaseModel":
+            cls = ["BaseModel", "User"]
+            if args[0] not in cls:
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
@@ -51,7 +56,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = separarArgs(arg)
-            if args[0] != "BaseModel":
+            cls = ["BaseModel", "User"]
+            if args[0] not in cls:
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
@@ -69,7 +75,8 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Prints all string representation of all instances based
         or not on the class name"""
-        if arg == 'BaseModel' or not arg:
+        cls = ["BaseModel", "User"]
+        if arg in cls or not arg:
             all_objs = storage.all()
             lis = []
             for obj_id in all_objs.keys():
@@ -86,7 +93,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = separarArgs(arg)
-            if args[0] != "BaseModel":
+            cls = ["BaseModel", "User"]
+            if args[0] not in cls:
                 print("** class doesn't exist **")
             elif len(args) == 1:
                 print("** instance id missing **")
