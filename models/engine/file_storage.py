@@ -22,8 +22,8 @@ class FileStorage:
         """serializes __objects to the JSON file (path: __file_path)"""
         d1 = {}
         with open(self.__file_path, "w") as f:
-            for k, v in self.__objects.items():
-                d1[k] = v.__str__()
+            for key, value in self.__objects.items():
+                d1[key] = value.to_dict()
             f.write(json.dumps(d1))
 
     def reload(self):
@@ -32,7 +32,9 @@ class FileStorage:
         exist, no exception should be raised)"""
         try:
             with open(self.__file_path, 'r') as f:
-                self.__objects = json.loads(f.read())
-            return self.__objects
-        except Exception:
+                diccionario = json.loads(f.read())
+            for key in diccionario.keys():
+                value = diccionario[key]
+                self.__objects[key] = BaseModel(**value)
+        except FileNotFoundError:
             pass
