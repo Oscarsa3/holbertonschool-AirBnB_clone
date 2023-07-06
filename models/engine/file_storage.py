@@ -3,6 +3,11 @@
 and deserializes JSON file to instances"""
 import json
 from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
@@ -30,11 +35,14 @@ class FileStorage:
         """deserializes the JSON file to __objects (only if the JSON file
         (__file_path) exists ; otherwise, do nothing. If the file doesn’t
         exist, no exception should be raised)"""
+        cls = ["BaseModel", "User", "State", "City",
+               "Place", "Amenity", "Review"]
         try:
             with open(self.__file_path, 'r') as f:
                 diccionario = json.loads(f.read())
             for key in diccionario.keys():
                 value = diccionario[key]
-                self.__objects[key] = BaseModel(**value)
+                if value['__class__'] in cls:
+                    self.__objects[key] = eval(value['__class__'])(**value)
         except FileNotFoundError:
             pass
