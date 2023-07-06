@@ -24,7 +24,8 @@ class BaseModel:
                     self.created_at = datetime.datetime.fromisoformat(value)
                 elif keys == 'updated_at':
                     self.updated_at = datetime.datetime.fromisoformat(value)
-                setattr(self, keys, value)
+                else:
+                    setattr(self, keys, value)
 
     def __str__(self):
         """Print"""
