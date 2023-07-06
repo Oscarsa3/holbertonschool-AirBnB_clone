@@ -15,7 +15,7 @@ class HBNBCommand(cmd.Cmd):
     """Command interpreter"""
     prompt = "(hbnb) "
     file = None
-    cls = ["BaseModel", "User", "Place", "City", "Amenity", "Review"]
+    cls = ["BaseModel", "User", "State", "Place", "City", "Amenity", "Review"]
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it (to the JSON file)
