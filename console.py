@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif arg in self.cls:
             new = eval(arg)()
-            new.save()
+            eval(arg).save(new)
             print(new.id)
         else:
             print("** class doesn't exist **")
