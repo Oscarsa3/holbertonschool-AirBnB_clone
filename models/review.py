@@ -3,7 +3,7 @@
 from models.base_model import BaseModel
 
 
-class State(BaseModel):
+class Review(BaseModel):
     """This class has one attribute"""
     place_id = ""
     user_id = ""
