@@ -64,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
                         storage.save()
                         break
                 else:
-                    print("** instance id missing **")
+                    print("** no instance found **")
 
     def do_all(self, arg):
         """Prints all string representation of all instances based
