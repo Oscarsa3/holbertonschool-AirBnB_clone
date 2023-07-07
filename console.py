@@ -75,13 +75,24 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Prints all string representation of all instances based
         or not on the class name"""
-        if arg in self.cls or not arg:
+        if not arg:
             all_objs = storage.all()
             lis = []
             for obj_id in all_objs.keys():
                 obj = all_objs[obj_id]
                 lis.append(str(obj))
             print(lis)
+        elif arg in self.cls:
+            all_objs = storage.all()
+            lis = []
+            for obj_id in all_objs.keys():
+                obj = all_objs[obj_id]
+                if arg == obj.__class__.__name__:
+                    lis.append(str(obj))
+            if len(lis) > 0:
+                print(lis)
+            else:
+                print("** class doesn't exist **")
         else:
             print("** class doesn't exist **")
 
@@ -105,10 +116,10 @@ class HBNBCommand(cmd.Cmd):
                 for key in all_objs.keys():
                     o = all_objs[key]
                     if o.id == args[1] and o.__class__.__name__ == args[0]:
-                        setattr(o, args[2], args[3][1:-1])
+                        setattr(o, args[2], args[3].strip('"'))
                         break
-                    else:
-                        print("** no instance found **")
+                else:
+                    print("** no instance found **")
 
     def do_EOF(self, line):
         """When pushing a EOF"""
