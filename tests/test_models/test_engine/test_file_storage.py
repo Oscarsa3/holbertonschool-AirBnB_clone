@@ -1,6 +1,7 @@
 """Tests for the FileStorage class"""
 import unittest
 import models
+import os
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
@@ -31,4 +32,30 @@ class Test_FileStorage(unittest.TestCase):
         self.assertRaises(TypeError, models.storage.save, None)
 
     def test_reload(self):
-        pass
+        bm = BaseModel()
+        models.storage.save()
+        self.assertAlmostEqual(os.path.exists("file.json"), True)
+
+        file_path = FileStorage._FileStorage__file_path
+        os.remove(file_path)
+
+        models.storage._FileStorage__objects.clear()
+        self.assertAlmostEqual(os.path.exists("file.json"), False)
+        self.assertAlmostEqual(models.storage.reload(), None)
+        self.assertAlmostEqual(len(models.storage._FileStorage__objects), 0)
+
+        models.storage.new(BaseModel())
+        self.assertAlmostEqual(len(models.storage._FileStorage__objects), 1)
+        self.assertAlmostEqual(os.path.exists("file.json"), False)
+        models.storage.save()
+        if os.path.exists("file.json"):
+            with open("file.json", 'r')as f:
+                letras = len(f.read())
+        self.assertAlmostEqual(os.path.exists("file.json"), True)
+        models.storage.new(BaseModel())
+        models.storage.reload()
+        self.assertAlmostEqual(len(models.storage._FileStorage__objects), 2)
+        if os.path.exists("file.json"):
+            with open("file.json", 'r')as f:
+                letras2 = len(f.read())
+        self.assertAlmostEqual(letras, letras2)
