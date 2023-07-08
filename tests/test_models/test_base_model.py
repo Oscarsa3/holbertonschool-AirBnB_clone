@@ -25,7 +25,7 @@ class Test_BaseModel(unittest.TestCase):
 
     def test_save(self):
         b3 = BaseModel()
-        b_up = "2017-06-14T22:31:03.285259"
+        b_up = b3.updated_at
         b3.save()
         self.assertNotEqual(b_up, b3.updated_at)
         self.assertAlmostEqual(os.path.exists('file.json'), True)
