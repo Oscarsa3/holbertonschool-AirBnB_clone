@@ -3,8 +3,6 @@
 import unittest
 import datetime
 import os
-from unittest import mock
-import io
 from models.base_model import BaseModel
 
 
@@ -14,10 +12,15 @@ class Test_BaseModel(unittest.TestCase):
     def test_BaseModel(self):
         b1 = BaseModel()
         b1_dict = b1.to_dict()
+        b2 = BaseModel(**b1_dict)
         self.assertAlmostEqual(type(b1_dict['updated_at']), str)
         self.assertTrue('__class__' in b1_dict)
         self.assertAlmostEqual(type(b1.created_at), datetime.datetime)
         self.assertAlmostEqual(type(b1.updated_at), datetime.datetime)
+        self.assertEqual(b1.id, b2.id)
+        self.assertEqual(b1.created_at, b2.created_at)
+        self.assertEqual(b1.updated_at, b2.updated_at)
+        self.assertNotIn('__class__', b2.__dict__)
 
     def test_str(self):
         b2 = BaseModel()
