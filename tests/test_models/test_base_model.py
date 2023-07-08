@@ -3,6 +3,8 @@
 import unittest
 import datetime
 import os
+from unittest import mock
+import io
 from models.base_model import BaseModel
 
 
@@ -17,17 +19,21 @@ class Test_BaseModel(unittest.TestCase):
         self.assertAlmostEqual(type(b1.created_at), datetime.datetime)
         self.assertAlmostEqual(type(b1.updated_at), datetime.datetime)
 
-    def test_save(self):
+    def test_str(self):
         b2 = BaseModel()
-        b_cre = "2017-06-14T22:31:03.285259"
-        b2.save()
-        self.assertNotEqual(b_cre, b2.created_at)
+        self.assertAlmostEqual(type(b2.__str__()), str)
+
+    def test_save(self):
+        b3 = BaseModel()
+        b_up = "2017-06-14T22:31:03.285259"
+        b3.save()
+        self.assertNotEqual(b_up, b3.updated_at)
         self.assertAlmostEqual(os.path.exists('file.json'), True)
 
     def test_to_dict(self):
-        b3 = BaseModel()
-        b3_dict = b3.to_dict()
-        self.assertTrue('__class__' in b3_dict)
-        self.assertAlmostEqual(type(b3_dict['id']), str)
-        self.assertAlmostEqual(type(b3_dict['updated_at']), str)
-        self.assertAlmostEqual(type(b3_dict['created_at']), str)
+        b4 = BaseModel()
+        b4_dict = b4.to_dict()
+        self.assertTrue('__class__' in b4_dict)
+        self.assertAlmostEqual(type(b4_dict['id']), str)
+        self.assertAlmostEqual(type(b4_dict['updated_at']), str)
+        self.assertAlmostEqual(type(b4_dict['created_at']), str)
