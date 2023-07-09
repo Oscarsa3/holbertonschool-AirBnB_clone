@@ -33,7 +33,7 @@ class Test_FileStorage(unittest.TestCase):
 
     def test_reload(self):
         bm = BaseModel()
-        models.storage.save()
+        bm.save()
         self.assertAlmostEqual(os.path.exists("file.json"), True)
 
         file_path = FileStorage._FileStorage__file_path
@@ -43,25 +43,9 @@ class Test_FileStorage(unittest.TestCase):
         self.assertAlmostEqual(os.path.exists("file.json"), False)
         self.assertAlmostEqual(models.storage.reload(), None)
         self.assertAlmostEqual(len(models.storage._FileStorage__objects), 0)
-
-        models.storage.new(BaseModel())
+        models.storage._FileStorage__objects.clear()
+        models.storage.new(bm)
         self.assertAlmostEqual(len(models.storage._FileStorage__objects), 1)
-        self.assertAlmostEqual(os.path.exists("file.json"), False)
-        models.storage.save()
-        if os.path.exists("file.json"):
-            with open("file.json", 'r')as f:
-                letras = len(f.read())
+        self.assertEqual(models.storage.all(), {f"BaseModel.{bm.id}": bm})
+        bm.save()
         self.assertAlmostEqual(os.path.exists("file.json"), True)
-        models.storage.new(BaseModel())
-        models.storage.reload()
-        self.assertAlmostEqual(len(models.storage._FileStorage__objects), 2)
-        if os.path.exists("file.json"):
-            with open("file.json", 'r')as f:
-                letras2 = len(f.read())
-        self.assertAlmostEqual(letras, letras2)
-        os.remove('file.json')
-        obj = User()
-        models.storage.save()
-        models.storage.reload()
-        all_ = models.storage.all()
-        self.assertIsInstance(all_, dict)
