@@ -59,3 +59,9 @@ class Test_FileStorage(unittest.TestCase):
             with open("file.json", 'r')as f:
                 letras2 = len(f.read())
         self.assertAlmostEqual(letras, letras2)
+        os.remove('file.json')
+        obj = User()
+        models.storage.save()
+        models.storage.reload()
+        all_ = models.storage.all()
+        self.assertIsInstance(all_, dict)
