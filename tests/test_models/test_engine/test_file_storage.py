@@ -49,3 +49,7 @@ class Test_FileStorage(unittest.TestCase):
         self.assertEqual(models.storage.all(), {f"BaseModel.{bm.id}": bm})
         bm.save()
         self.assertAlmostEqual(os.path.exists("file.json"), True)
+        models.storage._FileStorage__objects.clear()
+        self.assertAlmostEqual(len(models.storage._FileStorage__objects), 0)
+        models.storage.reload()
+        self.assertEqual(len(models.storage._FileStorage__objects), 1)
