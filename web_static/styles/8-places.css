@@ -77,6 +77,10 @@
     padding-top: 50px;
 }
 
+.user {
+    margin-bottom: 10px;
+}
+
 .user span {
     font-weight: bold;
 }
