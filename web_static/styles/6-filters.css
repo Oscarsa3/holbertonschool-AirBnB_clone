@@ -24,7 +24,7 @@
     opacity: 90%;
 }
 
-.locations {
+.filters .locations {
     height: 100%;
     width: 25%;
     position: relative;
@@ -34,7 +34,7 @@
     justify-content: center;
 }
 
-.amenities {
+.filters .amenities {
     height: 100%;
     width: 25%;
     position: relative;
@@ -69,8 +69,8 @@
     padding-left: 20px;
 }
 
-.amenities:hover .popover, 
-.locations:hover .popover{
+.filters .amenities:hover .popover, 
+.filters .locations:hover .popover{
     display: block;
 }
 
@@ -79,7 +79,7 @@
     margin: 20px 0px;
 }
 
-.amenities ul {
+.filters .amenities ul {
     list-style-type: none;
     padding-left: inherit;
     padding-top: 20px;
