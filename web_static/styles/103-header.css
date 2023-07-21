@@ -5,35 +5,21 @@ header {
     border-bottom: 1px solid #CCCCCC;
     display: flex;
     align-items: center;
-}
-
-.logo {
-    width: 142px;
-    height: 60px;
-    margin-left: 20px;
     background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-size: 150px;
 }
 
 @media (max-width: 600px) {
     header {
         height: 60px;
-    }
-
-    .logo {
-        background-size: 80px;
-        background-repeat: no-repeat;
-        background-position: left;
+        background-size: 130px;
     }
 }
 
 @media (max-width: 320px) {
     header {
         height: 30px;
-    }
-
-    .logo {
-        background-size: 50px;
-        background-repeat: no-repeat;
-        background-position: left;
+        background-size: 70px;
     }
 }

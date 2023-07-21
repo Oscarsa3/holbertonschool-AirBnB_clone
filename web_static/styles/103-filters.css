@@ -55,7 +55,7 @@
     margin-left: 40px;
 }
 
-.popover {
+.filters .popover {
     display: none;
     position: absolute;
     background-color: #fafafa;
@@ -65,7 +65,7 @@
     width: 100%;
 }
 
-.popover h2 {
+.filters .popover h2 {
     font-size: 16px;
     padding-left: 20px;
 }

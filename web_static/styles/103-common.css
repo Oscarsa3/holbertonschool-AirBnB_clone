@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0; 
+}
+
+html {
+    min-height: 100%;
+    position: relative;
+  }
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: #484848;
+    font-size: 14px;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 12px;
+    }
+
+}
+
+@media (max-width: 320px) {
+    body {
+        font-size: 8px;
+    }
+}
